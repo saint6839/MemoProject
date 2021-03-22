@@ -46,13 +46,9 @@ public class MainFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
-        // 리사이클러뷰 아이템간 간격 조절
         RecyclerDecoration spaceDecoration = new RecyclerDecoration(20);
         recyclerView.addItemDecoration(spaceDecoration);
 
-
-        // 테스트용 기본 아이템 항목
         adapter.addItem(new MemoItem("하이하이","오후00:00"));
         recyclerView.setAdapter(adapter);
 
@@ -96,7 +92,7 @@ public class MainFragment extends Fragment {
             }
         });
 
-        // 메모 추가 버튼
+
         Button button = rootView.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

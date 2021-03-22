@@ -17,8 +17,6 @@ public class MemoWriteActivity extends AppCompatActivity {
     TextView textView;
     EditText editText;
 
-
-    // 작성 시간 정보
     long now = System.currentTimeMillis();
     Date date = new Date(now);
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

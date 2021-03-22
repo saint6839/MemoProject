@@ -15,8 +15,6 @@ import java.util.Date;
 public class MemoViewActivity extends AppCompatActivity {
     EditText editText;
 
-
-    // 작성 시간 정보
     long now = System.currentTimeMillis();
     Date date = new Date(now);
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
