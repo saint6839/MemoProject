@@ -1,12 +1,17 @@
 package com.example.memoproject;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -16,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     UserFragment userFragment;
     CalenderFragment calenderFragment;
     ViewPager viewpager;
-
+    Toolbar toolbar;
+    ActionBar actionBar;
 
     //마지막으로 뒤로가기 버튼을 눌렀던 시간 저장
     private long backKeyPressedTime = 0;
@@ -29,10 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //액션바에 포스트잇 이미지 추가
-        getSupportActionBar().setIcon(R.drawable.memo_actionbar);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         viewpager = findViewById(R.id.viewPager);
         viewpager.setOffscreenPageLimit(3);
@@ -56,6 +59,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        actionBar = getSupportActionBar();
+//        actionBar.setDisplayShowCustomEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(false);
+//        actionBar.setDisplayShowTitleEnabled(false);
+//        actionBar.setDisplayShowHomeEnabled(false);
+//
+//        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+//        View actionbar = inflater.inflate(R.layout.custom_actionbar, null);
+//        actionBar.setCustomView(actionbar);
+//
+//        Toolbar parent = (Toolbar) actionbar.getParent();
+//        parent.setContentInsetsAbsolute(0,0);
+//
+//        return true;
+//    }
+
     @Override
     public void onBackPressed() {
 
@@ -77,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
             toast.cancel();
         }
+
+
     }
+
 }
 
