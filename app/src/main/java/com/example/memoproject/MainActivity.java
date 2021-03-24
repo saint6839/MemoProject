@@ -1,20 +1,24 @@
 package com.example.memoproject;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,40 +41,72 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
+        //BottomNavigationView 에서 각 항목을 눌렀을때 해당하는 fragment로 이동시키기
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.navigation_memo:
+                        viewpager.setCurrentItem(0);
+                        break;
+                    case R.id.navigation_calender:
+                        viewpager.setCurrentItem(1);
+                        break;
+                    case R.id.navigation_search:
+                        viewpager.setCurrentItem(2);
+                        break;
+                }
+                return true;
+            }
+        });
         viewpager = findViewById(R.id.viewPager);
         viewpager.setOffscreenPageLimit(3);
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
 
-        //초기 화면 좌측 스와이프 시 나오는 프래그먼트
-        userFragment = new UserFragment();
-        pagerAdapter.addItem(userFragment);
-
         //초기 화면 프래그먼트
         mainFragment = new MainFragment();
         pagerAdapter.addItem(mainFragment);
 
-        //초기 화면 우측 스와이프 시 나오는 프래그먼트
+        //두번째
         calenderFragment = new CalenderFragment();
         pagerAdapter.addItem(calenderFragment);
 
+        //세번째
+        userFragment = new UserFragment();
+        pagerAdapter.addItem(userFragment);
+
+
         viewpager.setAdapter(pagerAdapter);
-        viewpager.setCurrentItem(1);
+        viewpager.setCurrentItem(0);
+
+
+        //ViewPager 스와이프하면 하단 BottomNavigationView 따라오게 하는 부분
+        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottomNavigationView.getMenu().getItem(position).setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
     }
     
 
     @Override
     public void onBackPressed() {
-
         //마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
         //마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지났으면 Toast Show
         //2000milliseconds = 2seconds
@@ -80,15 +116,15 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
             return;
         }
-
         //마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
         //마지막으로 뒤로가기 버튼을 눌렀던 시간이 2초가 지나지 않았으면 종료
         //현재 표시된 Toast 취소
-
         if(System.currentTimeMillis() <= backKeyPressedTime + 2000){
             finish();
             toast.cancel();
         }
+
+
     }
 }
 
