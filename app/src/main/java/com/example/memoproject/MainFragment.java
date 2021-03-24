@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainFragment extends Fragment {
     MainActivity activity;
     RecyclerView recyclerView;
@@ -93,7 +95,7 @@ public class MainFragment extends Fragment {
         });
 
 
-        Button button = rootView.findViewById(R.id.button);
+        FloatingActionButton button = rootView.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

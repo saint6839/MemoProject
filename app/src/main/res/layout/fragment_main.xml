@@ -6,28 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="657dp"
+            android:layout_height="756dp"
             android:layout_marginTop="5dp" />
 
-        <Button
-            android:layout_gravity="center_horizontal"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_marginTop="580dp"
             android:id="@+id/button"
-            android:layout_width="61dp"
-            android:layout_height="61dp"
-            android:background="@drawable/memo_add_theme"
-            android:text="+"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:fabCustomSize="70dp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/ic_action_name"
+            tools:ignore="VectorDrawableCompat" />
 
 </FrameLayout>

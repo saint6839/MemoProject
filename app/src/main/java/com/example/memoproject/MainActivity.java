@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+
 public class MainActivity extends AppCompatActivity {
     MainFragment mainFragment;
     UserFragment userFragment;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewpager;
     Toolbar toolbar;
     ActionBar actionBar;
+
 
     //마지막으로 뒤로가기 버튼을 눌렀던 시간 저장
     private long backKeyPressedTime = 0;
@@ -37,15 +39,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         viewpager = findViewById(R.id.viewPager);
         viewpager.setOffscreenPageLimit(3);
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
 
+        //초기 화면 좌측 스와이프 시 나오는 프래그먼트
         userFragment = new UserFragment();
         pagerAdapter.addItem(userFragment);
+
+        //초기 화면 프래그먼트
         mainFragment = new MainFragment();
         pagerAdapter.addItem(mainFragment);
+
+        //초기 화면 우측 스와이프 시 나오는 프래그먼트
         calenderFragment = new CalenderFragment();
         pagerAdapter.addItem(calenderFragment);
 
@@ -58,24 +66,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        actionBar = getSupportActionBar();
-//        actionBar.setDisplayShowCustomEnabled(true);
-//        actionBar.setDisplayHomeAsUpEnabled(false);
-//        actionBar.setDisplayShowTitleEnabled(false);
-//        actionBar.setDisplayShowHomeEnabled(false);
-//
-//        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//        View actionbar = inflater.inflate(R.layout.custom_actionbar, null);
-//        actionBar.setCustomView(actionbar);
-//
-//        Toolbar parent = (Toolbar) actionbar.getParent();
-//        parent.setContentInsetsAbsolute(0,0);
-//
-//        return true;
-//    }
+    
 
     @Override
     public void onBackPressed() {
@@ -98,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
             toast.cancel();
         }
-
-
     }
-
 }
 
