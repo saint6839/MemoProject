@@ -7,18 +7,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
+    MutableLiveData<ArrayList<MemoItem>> liveItems = new MutableLiveData<ArrayList<MemoItem>>();       // LiveData와 List따로 관리하기
+    private List<MemoItem> items = new ArrayList<MemoItem>();
 
-    private ArrayList<MemoItem> items = new ArrayList<MemoItem>();
+    // 뭔진 잘 모르겠지만 일단 추가..
+    private AppDatabase db;
+    public MemoAdapter (AppDatabase db){
+        this.db = db;
+    }
 
     OnItemClickListener clickListener;
     OnItemLongClickListener longClickListener;
-
 
 
     Context context;
@@ -65,14 +72,23 @@ public class MemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         return items.size();
     }
 
+    public List<MemoItem> getItems() { return items; }
+
     public MemoItem getItem(int position){
         return items.get(position);
     }
 
 
+    // MemoItem을 리스트화한 객체를 통째로 저장후 변화 알림.
+    public void setItems(List<MemoItem> data){
+        items = data;
+        notifyDataSetChanged();
+    }
+
     //리사이클러뷰 아이템 추가
     void addItem(MemoItem item){
         items.add(item);
+        notifyDataSetChanged();
     }
 
     // 리사이클러뷰 아이템 삭제
@@ -135,7 +151,5 @@ public class MemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             textView.setText(item.getContent());
             textView2.setText(item.getTime());
         }
-
-
     }
 }

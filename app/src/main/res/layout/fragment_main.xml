@@ -9,7 +9,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="756dp"
+            android:layout_height="653dp"
             android:layout_marginTop="5dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

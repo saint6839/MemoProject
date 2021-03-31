@@ -26,9 +26,6 @@ public class MainActivity extends AppCompatActivity {
     UserFragment userFragment;
     CalenderFragment calenderFragment;
     ViewPager viewpager;
-    Toolbar toolbar;
-    ActionBar actionBar;
-
 
     //마지막으로 뒤로가기 버튼을 눌렀던 시간 저장
     private long backKeyPressedTime = 0;
@@ -69,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
         mainFragment = new MainFragment();
         pagerAdapter.addItem(mainFragment);
 
-        //두번째
+        //두번째 페이지
         calenderFragment = new CalenderFragment();
         pagerAdapter.addItem(calenderFragment);
 
-        //세번째
+        //세번째 페이지
         userFragment = new UserFragment();
         pagerAdapter.addItem(userFragment);
 
@@ -82,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         viewpager.setCurrentItem(0);
 
 
-        //ViewPager 스와이프하면 하단 BottomNavigationView 따라오게 하는 부분
+        //ViewPager 스와이프하면 하단 BottomNavigationView 인덱스 따라오게 하는 부분
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -99,12 +96,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-    
-
+    // 뒤로가기 버튼 2번 터치하면 종료되는 이벤트
     @Override
     public void onBackPressed() {
         //마지막으로 뒤로가기 버튼을 눌렀던 시간에 2초를 더해 현재시간과 비교 후
@@ -123,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
             toast.cancel();
         }
-
-
     }
 }
 
