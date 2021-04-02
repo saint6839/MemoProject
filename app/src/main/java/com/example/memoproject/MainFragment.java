@@ -38,6 +38,7 @@ public class MainFragment extends Fragment {
         super.onAttach(context);
         activity = (MainActivity) getActivity();
 
+
     }
 
     @Override
